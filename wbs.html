@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌴 セブ島 家族旅行 2027 ｜ WBS（準備タスク）</title>
+<meta name="description" content="セブ島家族旅行2027の準備タスクをWEB上で入力・編集・進捗管理。">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .wbs-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:18px; }
+  .wbs-toolbar select, .wbs-toolbar input[type=text] {
+    font-family:inherit; font-size:.9rem; padding:8px 12px; border:1.5px solid var(--line);
+    border-radius:999px; background:#fff; color:var(--ink);
+  }
+  .progress-card { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .progress-ring { position:relative; width:96px; height:96px; flex:0 0 auto; }
+  .progress-ring svg { transform:rotate(-90deg); }
+  .progress-ring .pct { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.25rem; color:var(--ocean-deep); }
+  .stat-grid { display:flex; gap:14px; flex-wrap:wrap; }
+  .stat { background:var(--sand); border-radius:12px; padding:10px 16px; text-align:center; min-width:84px; }
+  .stat b { display:block; font-size:1.4rem; color:var(--ocean-deep); }
+  .stat span { font-size:.78rem; color:var(--ink-soft); }
+  .phase-group { margin-bottom:26px; }
+  .phase-head { display:flex; align-items:center; gap:10px; margin:0 0 10px; font-size:1.05rem; color:var(--ocean-deep); font-weight:800; }
+  .phase-head .count { font-size:.8rem; color:var(--ink-soft); font-weight:600; }
+  table.wbs { min-width:760px; }
+  table.wbs td { vertical-align:middle; }
+  table.wbs input[type=text], table.wbs input[type=date], table.wbs select, table.wbs textarea {
+    width:100%; font-family:inherit; font-size:.86rem; border:1px solid transparent; background:transparent;
+    border-radius:6px; padding:5px 6px; color:var(--ink); resize:vertical;
+  }
+  table.wbs input:hover, table.wbs select:hover, table.wbs textarea:hover { background:#f3f9fb; }
+  table.wbs input:focus, table.wbs select:focus, table.wbs textarea:focus { outline:none; border-color:var(--ocean-light); background:#fff; }
+  table.wbs td.done input, table.wbs td.done textarea { text-decoration:line-through; color:var(--ink-soft); }
+  .row-doing { background:#fffaf0 !important; }
+  .row-done { background:#f1f9f3 !important; }
+  .status-sel { font-weight:700; }
+  .st-todo { color:var(--ink-soft); } .st-doing { color:var(--sun-deep); } .st-done { color:var(--palm-deep); }
+  .del-btn { border:none; background:transparent; cursor:pointer; color:var(--coral); font-size:1.1rem; padding:4px 8px; border-radius:8px; }
+  .del-btn:hover { background:#ffe7e3; }
+  .col-due { width:130px; } .col-owner { width:120px; } .col-status { width:120px; } .col-act { width:44px; }
+  .saved-flash { color:var(--palm-deep); font-size:.82rem; font-weight:700; opacity:0; transition:opacity .3s; }
+  .saved-flash.show { opacity:1; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">🌴 CEBU 2027</a>
+    <div class="nav-links">
+      <a href="index.html">ホーム</a>
+      <a href="index.html#plans">プラン比較</a>
+      <a href="guide.html">詳細ガイド</a>
+      <a href="wbs.html" class="active">WBS</a>
+      <a href="proposal-original/">旧プラン案 ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="badge">出発まで準備タスク管理</span>
+  <h1>WBS ｜ 旅行までの準備</h1>
+  <p>やることをWEB上で入力・編集できます。担当・期限・ステータスはこのブラウザに自動保存されます。</p>
+</header>
+
+<main class="wrap">
+
+  <div class="callout info" style="margin-bottom:24px">
+    💡 各セルをクリックすると<strong>その場で編集</strong>できます。変更は自動でこのブラウザ(localStorage)に保存されます。共有・バックアップは「エクスポート」でJSON保存し、別端末で「インポート」してください。
+  </div>
+
+  <section class="section">
+    <div class="card progress-card">
+      <div class="progress-ring">
+        <svg width="96" height="96" viewBox="0 0 96 96">
+          <circle cx="48" cy="48" r="42" fill="none" stroke="#e3ddd0" stroke-width="10"/>
+          <circle id="ringFg" cx="48" cy="48" r="42" fill="none" stroke="#2e9e6b" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/>
+        </svg>
+        <div class="pct" id="pctText">0%</div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><b id="stTotal">0</b><span>全タスク</span></div>
+        <div class="stat"><b id="stDone" style="color:var(--palm-deep)">0</b><span>完了</span></div>
+        <div class="stat"><b id="stDoing" style="color:var(--sun-deep)">0</b><span>対応中</span></div>
+        <div class="stat"><b id="stTodo">0</b><span>未着手</span></div>
+        <div class="stat"><b id="stOverdue" style="color:var(--coral-deep)">0</b><span>期限超過</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wbs-toolbar">
+      <input type="text" id="search" placeholder="🔍 タスク・担当・メモを検索">
+      <select id="filterPhase"><option value="">全フェーズ</option></select>
+      <select id="filterStatus">
+        <option value="">全ステータス</option>
+        <option value="todo">未着手</option>
+        <option value="doing">対応中</option>
+        <option value="done">完了</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="addBtn">＋ タスク追加</button>
+      <span style="flex:1"></span>
+      <span class="saved-flash" id="savedFlash">✓ 保存しました</span>
+      <button class="btn btn-ghost btn-sm" id="exportBtn">⬇ エクスポート</button>
+      <button class="btn btn-ghost btn-sm" id="importBtn">⬆ インポート</button>
+      <button class="btn btn-ghost btn-sm" id="resetBtn">↺ 初期化</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none">
+    </div>
+    <div id="wbsContainer"></div>
+  </section>
+
+  <div style="text-align:center">
+    <a class="btn btn-ghost" href="guide.html">🗺️ 詳細ガイドを見る</a>
+    <a class="btn btn-ghost" href="index.html">🏠 ホームへ</a>
+  </div>
+
+</main>
+
+<footer>
+  🌊 セブ島 家族旅行 2027 ｜ WBSデータはお使いのブラウザに保存されます ／
+  <a href="index.html">ホーム</a> ・ <a href="proposal-original/">旧プラン案 ↗</a>
+</footer>
+
+<script>
+const STORAGE_KEY = "cebu2027_wbs_v1";
+const PHASES = [
+  { id:"p1", name:"① 約1年前（2026/10〜12）", icon:"🛫" },
+  { id:"p2", name:"② 半年前（2027/1〜3）", icon:"🤿" },
+  { id:"p3", name:"③ 直前期（2027/5〜6）", icon:"🛡" },
+  { id:"p4", name:"④ 出発前（2027/7）", icon:"🎒" },
+  { id:"p5", name:"⑤ その他・連絡", icon:"📋" },
+];
+const DEFAULT_TASKS = [
+  { phase:"p1", task:"航空券 予約（福岡組 PR・成田組 5J/PR）最優先", owner:"幹事", due:"2026-11-15", status:"todo", note:"夏休み人気路線は1年前から埋まる" },
+  { phase:"p1", task:"ホテル予約（採用プランのホテル 6室）", owner:"幹事", due:"2026-12-15", status:"todo", note:"公式 or Booking.com" },
+  { phase:"p1", task:"コネクティングルーム メールリクエスト", owner:"幹事", due:"2026-12-20", status:"todo", note:"公式予約後にメールで早期依頼。①②/④⑤接続" },
+  { phase:"p1", task:"全員の参加人数・年齢・予算プラン最終確定", owner:"全員", due:"2026-10-31", status:"todo", note:"大人8・子供4／プランBで合意" },
+  { phase:"p2", task:"ジンベエザメ（オスロブ）ツアー 仮予約", owner:"幹事", due:"2027-02-15", status:"todo", note:"KKday等。6歳参加可否を現地確認" },
+  { phase:"p2", task:"アイランドホッピングツアー 仮予約", owner:"幹事", due:"2027-02-15", status:"todo", note:"夏は混雑" },
+  { phase:"p2", task:"空港送迎バン（8人乗り）手配確認", owner:"幹事", due:"2027-02-28", status:"todo", note:"片道2,300PHP目安" },
+  { phase:"p2", task:"ウェルカム／フェアウェルディナー 予約", owner:"幹事", due:"2027-03-31", status:"todo", note:"大人数はホテルに直接メール" },
+  { phase:"p2", task:"パスポート残存期間チェック（6ヶ月以上）", owner:"各家庭", due:"2027-03-31", status:"todo", note:"不足者は早めに更新" },
+  { phase:"p3", task:"海外旅行保険 加入", owner:"各家庭", due:"2027-06-20", status:"todo", note:"クレカ付帯の補償内容も確認" },
+  { phase:"p3", task:"現地SIM / eSIM / Wifi 手配方針決定", owner:"各家庭", due:"2027-06-30", status:"todo", note:"現地SIMが安く便利" },
+  { phase:"p3", task:"Grabアプリ インストール＆クレカ登録", owner:"全員", due:"2027-06-30", status:"todo", note:"日本で済ませると現地で楽" },
+  { phase:"p3", task:"子供の常備薬・酔い止め等 準備", owner:"各家庭", due:"2027-06-30", status:"todo", note:"解熱・下痢止め・絆創膏" },
+  { phase:"p4", task:"フィリピン eTravel 登録（全員）", owner:"各家庭", due:"2027-07-20", status:"todo", note:"etravel.gov.ph 入国必須・無料" },
+  { phase:"p4", task:"外貨両替（PHP）準備", owner:"各家庭", due:"2027-07-22", status:"todo", note:"銀行/ゆうちょが空港より得" },
+  { phase:"p4", task:"持ち物 最終チェック（年齢別リスト）", owner:"各家庭", due:"2027-07-25", status:"todo", note:"水着・日焼け止め・虫除け・常備薬" },
+  { phase:"p4", task:"オンラインチェックイン・座席確認", owner:"各家庭", due:"2027-07-25", status:"todo", note:"キッズミール事前予約(PR)" },
+  { phase:"p5", task:"「チームセブ12名！」グループLINE作成", owner:"幹事", due:"2026-11-30", status:"todo", note:"連絡・写真共有用" },
+  { phase:"p5", task:"集金・精算ルール決め（立替/割り勘）", owner:"幹事", due:"2027-01-31", status:"todo", note:"航空券・ホテルの支払い分担" },
+  { phase:"p5", task:"フォトブック係・カメラマン係 決定", owner:"全員", due:"2027-07-01", status:"todo", note:"13歳をカメラマン係に任命案" },
+];
+
+let tasks = load();
+function load(){ try{ const r=localStorage.getItem(STORAGE_KEY); if(r) return JSON.parse(r);}catch(e){} return DEFAULT_TASKS.map(t=>({...t,id:uid()})); }
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); flashSaved(); }
+function uid(){ return "t"+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function flashSaved(){ const f=document.getElementById("savedFlash"); f.classList.add("show"); clearTimeout(flashSaved._t); flashSaved._t=setTimeout(()=>f.classList.remove("show"),1200); }
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function render(){
+  const container=document.getElementById("wbsContainer");
+  const q=document.getElementById("search").value.trim().toLowerCase();
+  const fPhase=document.getElementById("filterPhase").value;
+  const fStatus=document.getElementById("filterStatus").value;
+  container.innerHTML="";
+  PHASES.forEach(phase=>{
+    if(fPhase && fPhase!==phase.id) return;
+    let rows=tasks.filter(t=>t.phase===phase.id).filter(t=>{
+      if(fStatus && t.status!==fStatus) return false;
+      if(q){ const hay=(t.task+" "+(t.owner||"")+" "+(t.note||"")).toLowerCase(); if(!hay.includes(q)) return false; }
+      return true;
+    });
+    if(rows.length===0) return;
+    const group=document.createElement("div"); group.className="phase-group";
+    const doneN=rows.filter(t=>t.status==="done").length;
+    group.innerHTML=`<h3 class="phase-head">${phase.icon} ${phase.name} <span class="count">（${doneN}/${rows.length} 完了）</span></h3>
+      <div class="table-wrap"><table class="wbs"><thead><tr>
+        <th>タスク</th><th class="col-owner">担当</th><th class="col-due">期限</th><th class="col-status">状況</th><th>メモ</th><th class="col-act"></th>
+      </tr></thead><tbody></tbody></table></div>`;
+    const tbody=group.querySelector("tbody");
+    rows.forEach(t=>tbody.appendChild(makeRow(t)));
+    container.appendChild(group);
+  });
+  if(!container.children.length){ container.innerHTML=`<div class="card" style="text-align:center;color:var(--ink-soft)">該当するタスクがありません。</div>`; }
+  updateStats(); populatePhaseFilter();
+}
+function makeRow(t){
+  const tr=document.createElement("tr"); tr.className="row-"+t.status;
+  const doneCls=t.status==="done"?"done":"";
+  const tdTask=document.createElement("td"); tdTask.className=doneCls; tdTask.innerHTML=`<input type="text" value="${esc(t.task)}" data-f="task">`;
+  const tdOwner=document.createElement("td"); tdOwner.innerHTML=`<input type="text" value="${esc(t.owner||"")}" data-f="owner" placeholder="担当">`;
+  const tdDue=document.createElement("td"); const overdue=t.due&&t.status!=="done"&&t.due<todayStr();
+  tdDue.innerHTML=`<input type="date" value="${esc(t.due||"")}" data-f="due" style="${overdue?'color:var(--coral-deep);font-weight:700':''}">`;
+  const tdStatus=document.createElement("td"); tdStatus.innerHTML=`<select class="status-sel st-${t.status}" data-f="status">
+    <option value="todo" ${t.status==="todo"?"selected":""}>未着手</option>
+    <option value="doing" ${t.status==="doing"?"selected":""}>対応中</option>
+    <option value="done" ${t.status==="done"?"selected":""}>完了</option></select>`;
+  const tdNote=document.createElement("td"); tdNote.className=doneCls; tdNote.innerHTML=`<textarea rows="1" data-f="note" placeholder="メモ">${esc(t.note||"")}</textarea>`;
+  const tdAct=document.createElement("td"); tdAct.innerHTML=`<button class="del-btn" title="削除">✕</button>`;
+  tr.append(tdTask,tdOwner,tdDue,tdStatus,tdNote,tdAct);
+  tr.querySelectorAll("[data-f]").forEach(el=>{
+    const ev=el.tagName==="SELECT"?"change":"input";
+    el.addEventListener(ev,()=>{ t[el.dataset.f]=el.value; if(el.dataset.f==="status"){save();render();} else {save();updateStats();} });
+  });
+  tdAct.querySelector("button").addEventListener("click",()=>{ if(confirm("このタスクを削除しますか？")){ tasks=tasks.filter(x=>x.id!==t.id); save(); render(); } });
+  return tr;
+}
+function updateStats(){
+  const total=tasks.length, done=tasks.filter(t=>t.status==="done").length, doing=tasks.filter(t=>t.status==="doing").length,
+    todo=tasks.filter(t=>t.status==="todo").length, overdue=tasks.filter(t=>t.due&&t.status!=="done"&&t.due<todayStr()).length;
+  document.getElementById("stTotal").textContent=total;
+  document.getElementById("stDone").textContent=done;
+  document.getElementById("stDoing").textContent=doing;
+  document.getElementById("stTodo").textContent=todo;
+  document.getElementById("stOverdue").textContent=overdue;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById("pctText").textContent=pct+"%";
+  const circ=2*Math.PI*42; document.getElementById("ringFg").style.strokeDashoffset=circ*(1-pct/100);
+}
+function populatePhaseFilter(){
+  const sel=document.getElementById("filterPhase"); if(sel.dataset.filled) return;
+  PHASES.forEach(p=>{ const o=document.createElement("option"); o.value=p.id; o.textContent=p.icon+" "+p.name; sel.appendChild(o); });
+  sel.dataset.filled="1";
+}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filterPhase").addEventListener("change",render);
+document.getElementById("filterStatus").addEventListener("change",render);
+document.getElementById("addBtn").addEventListener("click",()=>{
+  const phase=document.getElementById("filterPhase").value||PHASES[0].id;
+  tasks.push({id:uid(),phase,task:"新しいタスク",owner:"",due:"",status:"todo",note:""}); save(); render();
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(confirm("初期タスク一覧に戻します。現在の内容は失われます。よろしいですか？")){ tasks=DEFAULT_TASKS.map(t=>({...t,id:uid()})); save(); render(); }
+});
+document.getElementById("exportBtn").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(tasks,null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="cebu2027_wbs.json"; a.click(); URL.revokeObjectURL(a.href);
+});
+document.getElementById("importBtn").addEventListener("click",()=>document.getElementById("importFile").click());
+document.getElementById("importFile").addEventListener("change",(e)=>{
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{ try{ const data=JSON.parse(reader.result);
+      if(Array.isArray(data)){ tasks=data.map(t=>({id:t.id||uid(),phase:t.phase||"p5",task:t.task||"",owner:t.owner||"",due:t.due||"",status:t.status||"todo",note:t.note||""})); save(); render(); alert("インポートしました（"+tasks.length+"件）"); }
+      else alert("形式が正しくありません。"); }catch(err){ alert("読み込みに失敗しました："+err.message); } };
+  reader.readAsText(file); e.target.value="";
+});
+render();
+</script>
+
+</body>
+</html>

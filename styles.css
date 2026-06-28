@@ -1,0 +1,139 @@
+/* ===== Cebu Family Trip 2027 — Shared Styles ===== */
+:root {
+  --ocean: #0a7ea4;
+  --ocean-deep: #075b78;
+  --ocean-light: #2bb3d9;
+  --sand: #fdf6ec;
+  --sand-deep: #f5e7d0;
+  --coral: #ff6b5e;
+  --coral-deep: #e8503f;
+  --palm: #2e9e6b;
+  --palm-deep: #1f7a51;
+  --sun: #ffb33e;
+  --sun-deep: #a9700d;
+  --ink: #243b46;
+  --ink-soft: #4b6470;
+  --line: #e3ddd0;
+  --card: #ffffff;
+  --shadow: 0 6px 22px rgba(10, 70, 95, 0.10);
+  --shadow-lg: 0 14px 40px rgba(10, 70, 95, 0.18);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--sand);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--ocean); }
+
+/* ===== Top Nav ===== */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav-inner { max-width: 1080px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.nav-brand { font-weight: 800; font-size: 1.05rem; color: var(--ocean-deep); text-decoration: none; letter-spacing: .02em; }
+.nav-links { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+.nav-links a { text-decoration: none; color: var(--ink-soft); font-weight: 600; font-size: .92rem; padding: 7px 13px; border-radius: 999px; transition: all .15s; }
+.nav-links a:hover { background: var(--sand-deep); color: var(--ocean-deep); }
+.nav-links a.active { background: var(--ocean); color: #fff; }
+
+/* ===== Hero ===== */
+.hero {
+  background: radial-gradient(1200px 400px at 80% -10%, rgba(255,179,62,.35), transparent),
+              linear-gradient(135deg, var(--ocean) 0%, var(--ocean-light) 60%, var(--palm) 130%);
+  color: #fff; padding: 56px 20px 64px; text-align: center; position: relative; overflow: hidden;
+}
+.hero h1 { font-size: clamp(1.9rem, 5vw, 3rem); margin: 0 0 10px; font-weight: 800; }
+.hero p { font-size: clamp(1rem, 2.5vw, 1.2rem); margin: 0 auto; max-width: 660px; opacity: .96; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35); padding: 6px 16px; border-radius: 999px; font-weight: 700; font-size: .9rem; margin-bottom: 18px; }
+
+/* ===== Layout ===== */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 36px 20px 80px; }
+.section { margin-bottom: 48px; scroll-margin-top: 70px; }
+.section > h2 { font-size: 1.5rem; color: var(--ocean-deep); border-left: 6px solid var(--coral); padding-left: 12px; margin: 0 0 8px; }
+.section > .sub { color: var(--ink-soft); margin: 0 0 20px; font-size: .95rem; }
+
+/* ===== Cards ===== */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; }
+.grid { display: grid; gap: 18px; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+/* hub link cards */
+.hub-card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s; position: relative; overflow: hidden; }
+.hub-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.hub-card .ico { font-size: 2.4rem; }
+.hub-card h3 { margin: 0; font-size: 1.2rem; color: var(--ocean-deep); }
+.hub-card p { margin: 0; color: var(--ink-soft); font-size: .92rem; }
+.hub-card .go { margin-top: auto; font-weight: 700; color: var(--coral-deep); font-size: .9rem; }
+
+/* ===== Plan cards (data-driven) ===== */
+.plan-card { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s; border-top: 5px solid var(--ocean); position: relative; }
+.plan-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.plan-card .plan-id { font-size: .8rem; font-weight: 800; letter-spacing: .08em; color: var(--ink-soft); }
+.plan-card h3 { margin: 0; font-size: 1.35rem; color: var(--ocean-deep); }
+.plan-card .plan-sub { color: var(--ink-soft); font-size: .9rem; margin: 0; }
+.plan-card .plan-budget { font-size: 1.5rem; font-weight: 800; margin: 8px 0 0; }
+.plan-card .plan-budget small { font-size: .78rem; font-weight: 600; color: var(--ink-soft); }
+.plan-card ul { margin: 6px 0 0; padding-left: 18px; font-size: .86rem; color: var(--ink-soft); }
+.plan-card .go { margin-top: auto; padding-top: 8px; font-weight: 700; font-size: .9rem; }
+.accent-coral { border-top-color: var(--coral); } .accent-coral h3, .accent-coral .plan-budget, .accent-coral .go { color: var(--coral-deep); }
+.accent-palm  { border-top-color: var(--palm); }  .accent-palm h3, .accent-palm .plan-budget, .accent-palm .go { color: var(--palm-deep); }
+.accent-sun   { border-top-color: var(--sun); }   .accent-sun h3, .accent-sun .plan-budget, .accent-sun .go { color: var(--sun-deep); }
+.accent-ocean { border-top-color: var(--ocean); } .accent-ocean h3, .accent-ocean .plan-budget, .accent-ocean .go { color: var(--ocean-deep); }
+.accent-ink   { border-top-color: var(--ink-soft); } .accent-ink h3, .accent-ink .go { color: var(--ink); }
+
+/* status ribbon */
+.ribbon { position: absolute; top: 12px; right: -34px; transform: rotate(45deg); background: var(--coral); color: #fff; font-size: .72rem; font-weight: 800; padding: 4px 40px; box-shadow: var(--shadow); }
+.ribbon.archive { background: var(--ink-soft); }
+.ribbon.review { background: var(--sun); color: #4a3204; }
+
+/* ===== Tables ===== */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); }
+table { width: 100%; border-collapse: collapse; background: var(--card); font-size: .92rem; min-width: 520px; }
+th, td { padding: 11px 13px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--ocean-deep); color: #fff; font-weight: 700; white-space: nowrap; }
+tbody tr:nth-child(even) { background: #fbfaf6; }
+tbody tr:hover { background: #f3f9fb; }
+tfoot td { font-weight: 800; background: #f0f7fa; color: var(--ocean-deep); border-top: 2px solid var(--ocean-light); }
+.hl { background: #fff6e6 !important; }
+.hl td:first-child { box-shadow: inset 4px 0 0 var(--sun); }
+
+/* ===== Pills / chips ===== */
+.pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+.pill-ocean { background: #e1f3f9; color: var(--ocean-deep); }
+.pill-coral { background: #ffe7e3; color: var(--coral-deep); }
+.pill-palm { background: #e2f5ec; color: var(--palm-deep); }
+.pill-sun { background: #fff0d6; color: var(--sun-deep); }
+.pill-ink { background: #e7ecee; color: var(--ink); }
+
+/* ===== Timeline ===== */
+.day { border-left: 3px solid var(--ocean-light); padding-left: 18px; margin-bottom: 26px; position: relative; }
+.day::before { content: ""; position: absolute; left: -9px; top: 4px; width: 15px; height: 15px; border-radius: 50%; background: var(--coral); border: 3px solid #fff; box-shadow: var(--shadow); }
+.day h3 { margin: 0 0 4px; color: var(--ocean-deep); font-size: 1.15rem; }
+
+/* ===== Callout ===== */
+.callout { background: #fff6e6; border: 1px solid #ffe0a8; border-radius: 12px; padding: 14px 16px; color: #7a5410; font-size: .92rem; }
+.callout.warn { background: #ffeceb; border-color: #ffc4bf; color: var(--coral-deep); }
+.callout.info { background: #e7f4fa; border-color: #b9e1ef; color: var(--ocean-deep); }
+
+/* ===== Footer ===== */
+footer { background: var(--ink); color: #cdd9de; text-align: center; padding: 28px 20px; font-size: .88rem; }
+footer a { color: var(--ocean-light); }
+
+/* ===== Buttons ===== */
+.btn { display: inline-flex; align-items: center; gap: 7px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; padding: 10px 18px; border-radius: 999px; font-size: .92rem; text-decoration: none; transition: all .15s; }
+.btn-primary { background: var(--coral); color: #fff; }
+.btn-primary:hover { background: var(--coral-deep); }
+.btn-ghost { background: #fff; color: var(--ocean-deep); border: 1.5px solid var(--line); }
+.btn-ghost:hover { border-color: var(--ocean); background: #f3f9fb; }
+.btn-sm { padding: 6px 12px; font-size: .82rem; }
+
+@media (max-width: 600px) {
+  .nav-brand { font-size: .95rem; }
+  .wrap { padding: 24px 14px 60px; }
+}

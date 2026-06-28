@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌴 プラン詳細 ｜ セブ島 家族旅行 2027</title>
+<meta name="description" content="セブ島家族旅行2027 プラン詳細（A/B/C）。ホテル・航空券・部屋割り・費用内訳。">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">🌴 CEBU 2027</a>
+    <div class="nav-links">
+      <a href="index.html">ホーム</a>
+      <a href="index.html#plans">プラン比較</a>
+      <a href="guide.html">詳細ガイド</a>
+      <a href="wbs.html">WBS</a>
+      <a href="proposal-original/">旧プラン案 ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="badge" id="hStatus">プラン</span>
+  <h1 id="hTitle">プラン詳細</h1>
+  <p id="hSub"></p>
+</header>
+
+<main class="wrap" id="main">
+  <!-- 他プランへの切替 -->
+  <section class="section">
+    <div class="card" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <strong style="margin-right:6px">他のプラン：</strong>
+      <span id="planSwitch" style="display:flex;flex-wrap:wrap;gap:8px"></span>
+    </div>
+  </section>
+
+  <div id="content"></div>
+
+  <div style="text-align:center;margin-top:10px">
+    <a class="btn btn-primary" href="guide.html">🗺️ 全プラン共通の詳細ガイドへ</a>
+    <a class="btn btn-ghost" href="wbs.html">✅ 準備WBSへ</a>
+    <a class="btn btn-ghost" href="index.html#plans">↩ プラン比較に戻る</a>
+  </div>
+</main>
+
+<footer>
+  🌊 セブ島 家族旅行 2027 ｜ <a href="index.html">ホーム</a> ・ <a href="guide.html">詳細ガイド</a> ・ <a href="proposal-original/">旧プラン案 ↗</a>
+</footer>
+
+<script src="plans-data.js"></script>
+<script>
+const C = window.CEBU;
+const params = new URLSearchParams(location.search);
+const id = (params.get("id") || C.meta.confirmedId).toUpperCase();
+const p = C.plans.find(x => x.id === id);
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+if (!p) {
+  document.getElementById("hTitle").textContent = "プランが見つかりません";
+  document.getElementById("content").innerHTML = `<div class="card">指定のプラン「${esc(id)}」は存在しません。<a href="index.html#plans">プラン比較へ戻る</a>。</div>`;
+} else {
+  const isConfirmed = p.id === C.meta.confirmedId;
+  document.title = `🌴 プラン${p.id} ${p.subtitle} ｜ セブ島 家族旅行 2027`;
+  document.getElementById("hStatus").innerHTML = `PLAN ${p.id} ・ <strong>${p.status}</strong>${isConfirmed?" ✅":""}`;
+  document.getElementById("hTitle").textContent = `${p.name}｜${p.subtitle}`;
+  document.getElementById("hSub").innerHTML = `🏨 ${p.hotel}　／　予算 <strong>${p.budgetTotal}</strong>（12名）`;
+
+  // プラン切替ボタン
+  const sw = document.getElementById("planSwitch");
+  C.plans.forEach(x => {
+    const a = document.createElement("a");
+    a.className = "btn btn-sm " + (x.id===p.id ? "btn-primary" : "btn-ghost");
+    a.href = "plan.html?id=" + x.id;
+    a.textContent = `プラン${x.id}・${x.subtitle}`;
+    sw.appendChild(a);
+  });
+
+  const accent = `accent-${p.accent}`;
+  const costRows = p.cost.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join("");
+  const ct = p.costTotal;
+
+  document.getElementById("content").innerHTML = `
+    ${isConfirmed ? `<div class="callout" style="margin-bottom:28px">⭐ <strong>これが現在の採用プランです。</strong></div>` : `<div class="callout info" style="margin-bottom:28px">こちらは比較検討用のプランです。現在の採用は <a href="plan.html?id=${C.meta.confirmedId}">プラン${C.meta.confirmedId}</a> です。</div>`}
+
+    <section class="section">
+      <h2>このプランの概要</h2>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><th style="width:130px">日程</th><td>${C.meta.dates}（${C.meta.nights}）</td></tr>
+            <tr><th>人数</th><td>${C.meta.pax}</td></tr>
+            <tr><th>ホテル</th><td><strong>${p.hotel}</strong><br><small style="color:var(--ink-soft)">${p.hotelNote}</small></td></tr>
+            <tr><th>福岡組 航空</th><td>${p.flightsFuk}</td></tr>
+            <tr><th>成田組 航空</th><td>${p.flightsNrt}</td></tr>
+            <tr><th>部屋割り</th><td>${p.roomNote}</td></tr>
+            <tr><th>予算目安</th><td>大人 ${p.budgetAdult}／子供 ${p.budgetChild}<br><strong>12名合計 ${p.budgetTotal}</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>ハイライト</h2>
+      <div class="grid grid-2">
+        <div class="card ${accent}" style="border-top:5px solid">
+          <ul style="margin:0;padding-left:20px">${p.highlights.map(h=>`<li>${esc(h)}</li>`).join("")}</ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--ocean-deep)">このプランを選ぶ理由</h3>
+          <p style="margin:0">${esc(p.reason)}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>💰 費用内訳</h2>
+      <p class="sub">為替想定：${C.meta.fx}</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>費目</th><th>大人1名</th><th>子供1名</th><th>12名合計</th></tr></thead>
+          <tbody>${costRows}</tbody>
+          <tfoot><tr><td>${esc(ct[0])}</td><td>${esc(ct[1])}</td><td>${esc(ct[2])}</td><td>${esc(ct[3])}</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:14px">⚠️ ${C.meta.confirmedNote} 正式料金は各公式サイトでご確認ください。</div>
+    </section>
+  `;
+}
+</script>
+
+</body>
+</html>
