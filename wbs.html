@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌴 セブ島 家族旅行 2027 ｜ WBS（準備タスク）</title>
+<title>🌴 セブ島 家族旅行 2027 ｜ TODO（準備タスク）</title>
 <meta name="description" content="セブ島家族旅行2027の準備タスクをWEB上で入力・編集・進捗管理。">
 <link rel="stylesheet" href="styles.css">
 <style>
@@ -52,7 +52,7 @@
       <a href="index.html">ホーム</a>
       <a href="index.html#plans">プラン比較</a>
       <a href="guide.html">詳細ガイド</a>
-      <a href="wbs.html" class="active">WBS</a>
+      <a href="wbs.html" class="active">TODO</a>
       <a href="proposal-original/">パンフレット ↗</a>
     </div>
   </div>
@@ -60,14 +60,29 @@
 
 <header class="hero">
   <span class="badge">出発まで準備タスク管理</span>
-  <h1>WBS ｜ 旅行までの準備</h1>
-  <p>やることをWEB上で入力・編集できます。担当・期限・ステータスはこのブラウザに自動保存されます。</p>
+  <h1>TODO ｜ 旅行までの準備</h1>
+  <p>Googleスプレッドシートで全員と共有して管理できます。</p>
 </header>
 
 <main class="wrap">
 
+  <!-- Googleスプレッドシートリンク -->
+  <section class="section" style="margin-bottom:32px">
+    <div class="card" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-top:4px solid var(--palm)">
+      <div style="font-size:2.2rem">📊</div>
+      <div style="flex:1;min-width:220px">
+        <div style="font-weight:800;font-size:1.1rem;color:var(--palm-deep);margin-bottom:4px">Googleスプレッドシートで管理</div>
+        <div style="font-size:.9rem;color:var(--ink-soft)">全員がリアルタイムで編集・確認できます。Googleアカウントでログインしてください。</div>
+      </div>
+      <a id="gsLink" href="https://docs.google.com/spreadsheets/d/1QWVM5xMJFjla1mZdJv28oKu71MC4UGY9WC_JhoqdWOU/edit?gid=1876625710#gid=1876625710" target="_blank" rel="noopener"
+         class="btn btn-primary" style="background:var(--palm);white-space:nowrap">
+        スプレッドシートを開く →
+      </a>
+    </div>
+  </section>
+
   <div class="callout info" style="margin-bottom:24px">
-    💡 各セルをクリックすると<strong>その場で編集</strong>できます。変更は自動でこのブラウザ(localStorage)に保存されます。共有・バックアップは「エクスポート」でJSON保存し、別端末で「インポート」してください。
+    ℹ️ タスクの追加・編集・ステータス変更はすべて上の<strong>Googleスプレッドシート</strong>で行ってください。変更はメンバー全員に即時反映されます。
   </div>
 
   <section class="section">
@@ -118,7 +133,7 @@
 </main>
 
 <footer>
-  🌊 セブ島 家族旅行 2027 ｜ WBSデータはお使いのブラウザに保存されます ／
+  🌊 セブ島 家族旅行 2027 ｜ TODOデータはお使いのブラウザに保存されます ／
   <a href="index.html">ホーム</a> ・ <a href="proposal-original/">パンフレット ↗</a>
 </footer>
 
