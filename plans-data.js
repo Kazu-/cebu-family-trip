@@ -121,12 +121,12 @@ window.CEBU = {
   proposals: [
     {
       id: "original",
-      name: "オリジナル案",
-      subtitle: "最初に作ったプランページ",
+      name: "パンフレット",
+      subtitle: "最初に作成した旅行パンフレット",
       status: "アーカイブ",
       accent: "ink",
       url: "proposal-original/",
-      note: "以前作成したプランページ。上書きせず「たたき台」として保存しています。"
+      note: "最初に作成した旅行パンフレット。プランA/B/Cとは別の原案として保存しています。"
     }
   ]
 };
