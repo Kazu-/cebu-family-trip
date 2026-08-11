@@ -113,7 +113,7 @@ const tf = document.querySelector("#confirmedCostTable tfoot");
 tf.innerHTML = `<tr class="hl"><td><strong>${P.costTotal[0]}</strong></td><td><strong>${P.costTotal[1]}</strong></td><td><strong>${P.costTotal[2]}</strong></td><td><strong>${P.costTotal[3]}</strong></td></tr>`;
 
 (function(){
-  var dep = new Date("2027-07-27T00:00:00+09:00");
+  var dep = new Date("2027-07-26T00:00:00+09:00");
   var now = new Date();
   var diff = Math.ceil((dep - now) / 86400000);
   var el = document.getElementById("countdown");
