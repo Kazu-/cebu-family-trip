@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🌴 セブ島 家族旅行 2027 ｜ ホーム</title>
-<meta name="description" content="12名・福岡＋成田 2空港発 セブ島家族旅行 2027年夏。プラン比較・詳細ガイド・TODO・パンフレットのハブ。">
+<meta name="description" content="12名・福岡＋成田 2空港発 セブ島家族旅行 2027年夏。シャングリ・ラ マクタン セブに確定。詳細ガイド・TODOのハブ。">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,8 +14,7 @@
     <a class="nav-brand" href="index.html">🌴 CEBU 2027</a>
     <div class="nav-links">
       <a href="index.html" class="active">ホーム</a>
-      <a href="#plans">プラン比較</a>
-      <a href="guide.html">詳細ガイド</a>
+      <a href="guide.html">詳細ガイド（旅のしおり）</a>
       <a href="wbs.html">TODO</a>
       <a href="proposal-original/">パンフレット ↗</a>
     </div>
@@ -33,24 +32,12 @@
   <!-- メニュー -->
   <section class="section">
     <h2>メニュー</h2>
-    <p class="sub">行きたいページを選んでください。このホームを起点に、複数のプラン案・詳細ガイド・準備タスクを管理します。</p>
+    <p class="sub">行きたいページを選んでください。このホームを起点に、詳細ガイド・準備タスク・旧パンフレットを管理します。</p>
     <div class="grid grid-3" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <a class="card hub-card" style="border-top:4px solid var(--sun)" href="proposal-original/">
-        <span class="ico">📋</span>
-        <h3>パンフレット</h3>
-        <p>最初の案。まずはこれ見て気分を高めよう！🌴</p>
-        <span class="go">開く ↗</span>
-      </a>
-      <a class="card hub-card" style="border-top:4px solid var(--ocean)" href="#plans">
-        <span class="ico">🗂️</span>
-        <h3>プラン比較</h3>
-        <p>プランA／B／C…を比較。今後も案を追加していけます。</p>
-        <span class="go">プランを見る ↓</span>
-      </a>
       <a class="card hub-card" style="border-top:4px solid var(--palm)" href="guide.html">
         <span class="ico">🗺️</span>
-        <h3>詳細ガイド</h3>
-        <p>航空券・ホテル比較・5日間日程・アクティビティ・食事・持ち物・雨の日。全プラン共通の実用情報。</p>
+        <h3>詳細ガイド（旅のしおり）</h3>
+        <p>航空券・ホテル情報・5日間日程・アクティビティ・食事・持ち物・緊急連絡先まで、旅のしおりとして完結。</p>
         <span class="go">ガイドを見る →</span>
       </a>
       <a class="card hub-card" style="border-top:4px solid var(--coral)" href="wbs.html">
@@ -59,30 +46,26 @@
         <p>出発までにやることをWEB上で入力・編集・進捗管理。担当・期限・状況を保存。</p>
         <span class="go">タスクを管理する →</span>
       </a>
+      <a class="card hub-card" style="border-top:4px solid var(--sun)" href="proposal-original/">
+        <span class="ico">📋</span>
+        <h3>パンフレット（アーカイブ）</h3>
+        <p>検討初期に作成した最初の案。ホテル・日程は現在の確定内容と異なります。</p>
+        <span class="go">開く ↗</span>
+      </a>
     </div>
   </section>
 
-  <!-- プラン一覧（データ駆動） -->
-  <section class="section" id="plans">
-    <h2>🗂️ プラン比較</h2>
-    <p class="sub">各カードをクリックすると詳細ページへ。<span class="pill pill-coral">採用</span> が現在の本命です。</p>
-    <div class="grid grid-3" id="planCards"></div>
-  </section>
-
-  <!-- 比較表 -->
-  <section class="section">
-    <h2>📊 予算ひと目比較</h2>
-    <div class="table-wrap">
-      <table id="compareTable">
-        <thead><tr><th>プラン</th><th>ホテル</th><th>大人1名</th><th>子供1名</th><th>12名合計</th><th></th></tr></thead>
+  <!-- 確定内容サマリ -->
+  <section class="section" id="confirmed">
+    <h2>✅ 確定内容サマリ</h2>
+    <p class="sub">ホテル・日程は確定済み。詳細は <a href="guide.html">詳細ガイド</a> を参照してください。</p>
+    <div class="grid grid-3" id="confirmedCards"></div>
+    <div class="table-wrap" style="margin-top:18px">
+      <table id="confirmedCostTable">
+        <thead><tr><th>費目</th><th>大人1名</th><th>子供1名</th><th>12名合計</th></tr></thead>
         <tbody></tbody>
+        <tfoot></tfoot>
       </table>
-    </div>
-  </section>
-
-<section class="section">
-    <div class="callout info">
-      💡 <strong>拡張について：</strong>新しいプラン（プランD など）は <code>plans-data.js</code> に1件追記するだけで、このページとプラン詳細に自動で反映されます。
     </div>
   </section>
 
@@ -96,60 +79,37 @@
 <script src="plans-data.js"></script>
 <script>
 const C = window.CEBU;
-const STATUS_PILL = { "採用":"pill-coral", "検討中":"pill-sun", "アーカイブ":"pill-ink" };
-const RIBBON = { "採用":"", "検討中":"review", "アーカイブ":"archive" };
+const P = C.confirmed;
 
 document.getElementById("heroSub").innerHTML =
-  `${C.meta.dates}・${C.meta.nights}／${C.meta.pax}<br>プラン案・準備・パンフレットをここからまとめて確認できます。`;
+  `${C.meta.dates}・${C.meta.nights}／${C.meta.pax}<br>🏨 ${P.hotel} に確定。詳細は「詳細ガイド」からどうぞ。`;
 
-// plan cards
-const pc = document.getElementById("planCards");
-C.plans.forEach(p => {
-  const a = document.createElement("a");
-  a.className = "card plan-card accent-" + p.accent;
-  a.href = "plan.html?id=" + p.id;
-  a.innerHTML = `
-    <div class="ribbon ${RIBBON[p.status]||''}">${p.status}</div>
-    <div class="plan-id">PLAN ${p.id}</div>
-    <h3>${p.name}</h3>
-    <p class="plan-sub">${p.subtitle}</p>
-    <p class="plan-budget">${p.budgetTotal}<br><small>大人 ${p.budgetAdult}</small></p>
-    <ul>${p.highlights.map(h=>`<li>${h}</li>`).join("")}</ul>
-    <span class="go">🏨 ${p.hotel}</span>
-    <span class="go">詳細を見る →</span>`;
-  pc.appendChild(a);
-});
+const cc = document.getElementById("confirmedCards");
+cc.innerHTML = `
+  <div class="card">
+    <h3 style="margin-top:0">🏨 ホテル</h3>
+    <p style="font-size:.92rem;margin:0 0 6px"><strong>${P.hotel}</strong></p>
+    <p style="font-size:.88rem;color:var(--ink-soft);margin:0">${P.hotelNote}</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">✈️ フライト</h3>
+    <p style="font-size:.88rem;margin:0 0 6px"><strong>福岡組：</strong>${P.flightsFuk}</p>
+    <p style="font-size:.88rem;margin:0"><strong>成田組：</strong>${P.flightsNrt}</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">💰 予算目安</h3>
+    <p style="font-size:1.05rem;margin:0 0 4px"><strong>${P.budgetTotal}</strong></p>
+    <p style="font-size:.85rem;color:var(--ink-soft);margin:0">大人 ${P.budgetAdult}／子供 ${P.budgetChild}</p>
+  </div>`;
 
-// compare table
-const tb = document.querySelector("#compareTable tbody");
-C.plans.forEach(p => {
+const tb = document.querySelector("#confirmedCostTable tbody");
+P.cost.forEach(row => {
   const tr = document.createElement("tr");
-  if (p.id === C.meta.confirmedId) tr.className = "hl";
-  tr.innerHTML = `
-    <td><strong>プラン${p.id}</strong> <span class="pill ${STATUS_PILL[p.status]||''}">${p.status}</span><br><small>${p.subtitle}</small></td>
-    <td>${p.hotel}</td>
-    <td>${p.budgetAdult}</td>
-    <td>${p.budgetChild}</td>
-    <td><strong>${p.budgetTotal}</strong></td>
-    <td><a class="btn btn-ghost btn-sm" href="plan.html?id=${p.id}">詳細 →</a></td>`;
+  tr.innerHTML = row.map(c => `<td>${c}</td>`).join("");
   tb.appendChild(tr);
 });
-
-// proposals
-const prc = document.getElementById("proposalCards");
-(C.proposals||[]).forEach(p => {
-  const a = document.createElement("a");
-  a.className = "card plan-card accent-" + p.accent;
-  a.href = p.url;
-  a.innerHTML = `
-    <div class="ribbon ${RIBBON[p.status]||'archive'}">${p.status}</div>
-    <div class="plan-id">ARCHIVE</div>
-    <h3>${p.name}</h3>
-    <p class="plan-sub">${p.subtitle}</p>
-    <p style="font-size:.88rem;color:var(--ink-soft);margin:6px 0 0">${p.note||""}</p>
-    <span class="go">開く ↗</span>`;
-  prc.appendChild(a);
-});
+const tf = document.querySelector("#confirmedCostTable tfoot");
+tf.innerHTML = `<tr class="hl"><td><strong>${P.costTotal[0]}</strong></td><td><strong>${P.costTotal[1]}</strong></td><td><strong>${P.costTotal[2]}</strong></td><td><strong>${P.costTotal[3]}</strong></td></tr>`;
 </script>
 
 </body>
