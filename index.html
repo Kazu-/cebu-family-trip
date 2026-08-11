@@ -23,8 +23,9 @@
 
 <header class="hero">
   <span class="badge" id="heroBadge">12名・福岡＋成田 2空港発</span>
-  <h1>セブ島 家族旅行 2027</h1>
+  <h1>🌴 セブ島 家族旅行 2027</h1>
   <p id="heroSub">読み込み中…</p>
+  <p id="countdown" style="margin-top:16px;font-size:1.3rem;font-weight:800"></p>
 </header>
 
 <main class="wrap">
@@ -110,6 +111,17 @@ P.cost.forEach(row => {
 });
 const tf = document.querySelector("#confirmedCostTable tfoot");
 tf.innerHTML = `<tr class="hl"><td><strong>${P.costTotal[0]}</strong></td><td><strong>${P.costTotal[1]}</strong></td><td><strong>${P.costTotal[2]}</strong></td><td><strong>${P.costTotal[3]}</strong></td></tr>`;
+
+(function(){
+  var dep = new Date("2027-07-27T00:00:00+09:00");
+  var now = new Date();
+  var diff = Math.ceil((dep - now) / 86400000);
+  var el = document.getElementById("countdown");
+  if (!el) return;
+  if (diff > 0) el.textContent = "🎉 出発まであと " + diff + " 日！";
+  else if (diff === 0) el.textContent = "🎉 本日出発！いってらっしゃい！";
+  else el.textContent = "🌺 素敵な旅になりましたか？";
+})();
 </script>
 
 </body>

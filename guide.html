@@ -23,8 +23,9 @@
 
 <header class="hero">
   <span class="badge">旅のしおり ｜ 4泊5日（現地3日間・ホテル泊2泊）</span>
-  <h1>詳細ガイド（旅のしおり）</h1>
+  <h1>🌴 詳細ガイド（旅のしおり）</h1>
   <p>確定フライト・ホテル情報から日程・持ち物・緊急連絡先まで。出発前にこのページを見れば準備が完結します。</p>
+  <p id="countdown" style="margin-top:16px;font-size:1.3rem;font-weight:800"></p>
 </header>
 
 <main class="wrap">
@@ -117,42 +118,49 @@
 
   <!-- ホテル -->
   <section class="section" id="hotels">
-    <h2>🏨 ホテル比較</h2>
-    <p class="sub">12名・子連れ優先ランキング｜<strong style="color:var(--coral)">シャングリ・ラ マクタン セブに確定</strong>。他は検討時の参考情報です。</p>
-    <div class="table-wrap" style="margin-bottom:18px">
-      <table>
-        <thead><tr><th>ホテル</th><th>★</th><th>ビーチ</th><th>キッズ設備</th><th>空港距離</th><th>大人数</th><th>日本人評価</th><th>価格/泊(1室)</th></tr></thead>
-        <tbody>
-          <tr class="hl"><td>🥇シャングリ・ラ マクタン</td><td>⭐5</td><td>350m白砂・海洋保護区</td><td>アドベンチャーゾーン</td><td>約20分</td><td>✅541室</td><td>★★★★★</td><td>¥40,000〜80,000</td></tr>
-          <tr><td>🥈クリムゾン リゾート</td><td>⭐5</td><td>ビーチ・インフィニティ</td><td>CRIMZONE</td><td>約15分</td><td>✅ヴィラ</td><td>★★★★</td><td>¥35,000〜70,000</td></tr>
-          <tr><td>🥉プランテーション ベイ</td><td>⭐4</td><td>広大ラグーン(海水)</td><td>ゲームルーム充実</td><td>約15分</td><td>✅300室+</td><td>★★★★</td><td>¥25,000〜50,000</td></tr>
-          <tr><td>シェラトン セブ マクタン</td><td>⭐5</td><td>ビーチ・インフィニティ</td><td>○</td><td>約10分</td><td>✅</td><td>★★★★</td><td>¥30,000〜65,000</td></tr>
-          <tr><td>デュシタニ マクタン</td><td>⭐5</td><td>ビーチ</td><td>△</td><td>約20分</td><td>◯</td><td>★★★</td><td>¥35,000〜75,000</td></tr>
-          <tr><td>Jパーク アイランド</td><td>⭐4</td><td>人工ビーチ</td><td>最大規模プール</td><td>約5分</td><td>✅最大規模</td><td>★★★</td><td>¥20,000〜40,000</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="grid grid-3">
-      <div class="card"><h3 style="margin-top:0;color:var(--ocean-deep)">🥇 シャングリ・ラ（確定）</h3><p style="font-size:.9rem;margin:0">海洋保護区で無料シュノーケリング／屋内アドベンチャーゾーン／コネクティング可／6歳以下朝食無料。<strong>★★★★★</strong></p></div>
-      <div class="card"><h3 style="margin-top:0;color:var(--ocean-deep)">🥈 クリムゾン（参考・未採用）</h3><p style="font-size:.9rem;margin:0">ヴィラタイプで独立空間／CRIMZONE充実／複数ヴィラ隣接確保可／広いバスルーム。<strong>★★★★☆</strong></p></div>
-      <div class="card"><h3 style="margin-top:0;color:var(--ocean-deep)">🥉 プランテーション ベイ（参考・未採用）</h3><p style="font-size:.9rem;margin:0">世界最大級の海水ラグーン／室内ゲーム最充実／雨でも一日遊べる／コスパ良。<strong>★★★★☆</strong></p></div>
+    <h2>🏨 宿泊ホテル</h2>
+    <p class="sub">今回の旅の拠点はここ！南国リゾートで4泊5日を満喫します🌺</p>
+
+    <div class="card" style="border-top:6px solid var(--coral);position:relative;overflow:hidden">
+      <div style="position:absolute;top:16px;right:-38px;transform:rotate(45deg);background:var(--coral);color:#fff;font-size:.72rem;font-weight:800;padding:4px 46px;box-shadow:var(--shadow)">確定</div>
+      <h3 style="margin:0 0 4px;font-size:1.5rem;color:var(--coral-deep)">🥇 シャングリ・ラ マクタン セブ</h3>
+      <p style="margin:0 0 14px;color:var(--ink-soft)">セブNo.1ファミリーリゾート ｜ ⭐⭐⭐⭐⭐ ｜ 541室</p>
+      <div class="grid grid-2" style="margin-bottom:14px">
+        <ul style="margin:0;padding-left:20px;font-size:.94rem">
+          <li>🏖️ 350m白砂ビーチ＋海洋保護区で無料シュノーケリング</li>
+          <li>🧒 屋内アドベンチャーゾーン（雨でも安心・子供が飽きない）</li>
+          <li>🛏️ コネクティングルーム対応、6歳以下は朝食無料</li>
+        </ul>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><td style="white-space:nowrap"><strong>住所</strong></td><td>Punta Engano Road, Lapu-Lapu City, Cebu 6015, Philippines</td></tr>
+              <tr><td style="white-space:nowrap"><strong>電話</strong></td><td>+63 32 231 0288</td></tr>
+              <tr><td style="white-space:nowrap"><strong>チェックイン</strong></td><td>15:00〜（アーリーは有料応相談）</td></tr>
+              <tr><td style="white-space:nowrap"><strong>チェックアウト</strong></td><td>〜12:00（レイトは有料応相談）</td></tr>
+              <tr><td style="white-space:nowrap"><strong>空港から</strong></td><td>車で約20分</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="font-size:.85rem;color:var(--ink-soft);margin:0">💡 Grab配車・タクシー乗車時はこの住所・電話番号を運転手に見せるとスムーズ。出典：<a href="https://www.shangri-la.com/cebu/mactanresort/contact-us/" target="_blank" rel="noopener">Shangri-La公式サイト</a></p>
     </div>
 
-    <div class="card" style="margin-top:18px;border-left:4px solid var(--coral)">
-      <h3 style="margin-top:0;color:var(--ocean-deep)">📍 シャングリ・ラ マクタン セブ 基本情報</h3>
-      <div class="table-wrap">
+    <details style="margin-top:20px">
+      <summary style="cursor:pointer;color:var(--ocean-deep);font-weight:600">📎 検討時に比較した他のホテル候補（参考・アーカイブ）</summary>
+      <div class="table-wrap" style="margin-top:14px">
         <table>
+          <thead><tr><th>ホテル</th><th>★</th><th>ビーチ</th><th>キッズ設備</th><th>空港距離</th><th>大人数</th><th>日本人評価</th><th>価格/泊(1室)</th></tr></thead>
           <tbody>
-            <tr><td style="white-space:nowrap"><strong>住所</strong></td><td>Punta Engano Road, Lapu-Lapu City, Cebu 6015, Philippines</td></tr>
-            <tr><td style="white-space:nowrap"><strong>電話</strong></td><td>+63 32 231 0288</td></tr>
-            <tr><td style="white-space:nowrap"><strong>チェックイン</strong></td><td>15:00〜（アーリーチェックインは有料応相談）</td></tr>
-            <tr><td style="white-space:nowrap"><strong>チェックアウト</strong></td><td>〜12:00（レイトチェックアウトは有料応相談）</td></tr>
-            <tr><td style="white-space:nowrap"><strong>空港からの距離</strong></td><td>マクタン・セブ国際空港から車で約20分</td></tr>
+            <tr><td>クリムゾン リゾート</td><td>⭐5</td><td>ビーチ・インフィニティ</td><td>CRIMZONE</td><td>約15分</td><td>✅ヴィラ</td><td>★★★★</td><td>¥35,000〜70,000</td></tr>
+            <tr><td>プランテーション ベイ</td><td>⭐4</td><td>広大ラグーン(海水)</td><td>ゲームルーム充実</td><td>約15分</td><td>✅300室+</td><td>★★★★</td><td>¥25,000〜50,000</td></tr>
+            <tr><td>シェラトン セブ マクタン</td><td>⭐5</td><td>ビーチ・インフィニティ</td><td>○</td><td>約10分</td><td>✅</td><td>★★★★</td><td>¥30,000〜65,000</td></tr>
+            <tr><td>デュシタニ マクタン</td><td>⭐5</td><td>ビーチ</td><td>△</td><td>約20分</td><td>◯</td><td>★★★</td><td>¥35,000〜75,000</td></tr>
+            <tr><td>Jパーク アイランド</td><td>⭐4</td><td>人工ビーチ</td><td>最大規模プール</td><td>約5分</td><td>✅最大規模</td><td>★★★</td><td>¥20,000〜40,000</td></tr>
           </tbody>
         </table>
       </div>
-      <p style="font-size:.85rem;color:var(--ink-soft);margin:10px 0 0">💡 Grab配車・タクシー乗車時はこの住所・電話番号を運転手に見せるとスムーズ。出典：<a href="https://www.shangri-la.com/cebu/mactanresort/contact-us/" target="_blank" rel="noopener">Shangri-La公式サイト</a></p>
-    </div>
+    </details>
   </section>
 
   <!-- 部屋割り -->
@@ -210,26 +218,44 @@
 
   <!-- アクティビティ -->
   <section class="section" id="activities">
-    <h2>🤿 アクティビティ比較</h2>
-    <div class="callout info" style="margin-bottom:14px">💡 今回の日程はフル活動日が7/29の1日のみのため、<strong>アイランドホッピングを採用</strong>。ジンベエザメ・テワラン滝は移動時間の都合で今回は見送り、次回候補として掲載しています。</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>アクティビティ</th><th>6歳OK?</th><th>所要</th><th>料金/名</th><th>雨</th><th>おすすめ</th></tr></thead>
-        <tbody>
-          <tr class="hl"><td>アイランドホッピング</td><td>✅</td><td>6〜8h</td><td>¥5,000〜8,000</td><td>△</td><td>★★★★★</td></tr>
-          <tr class="hl"><td>ジンベエザメ(オスロブ)</td><td>✅一応</td><td>10〜12h</td><td>¥7,000〜12,000</td><td>△</td><td>★★★★★</td></tr>
-          <tr><td>シュノーケリング(ホテル)</td><td>✅</td><td>自由</td><td>無料〜¥2,000</td><td>✗</td><td>★★★★</td></tr>
-          <tr><td>パラセーリング</td><td>⚠️要確認</td><td>30〜45分</td><td>¥3,000〜5,000</td><td>✗</td><td>★★★★</td></tr>
-          <tr><td>バナナボート</td><td>✅</td><td>20〜30分</td><td>¥2,000〜3,500</td><td>✗</td><td>★★★★</td></tr>
-          <tr><td>体験ダイビング</td><td>✗(10歳+)</td><td>2〜3h</td><td>¥8,000〜15,000</td><td>✗</td><td>★★★</td></tr>
-          <tr class="hl"><td>テワラン滝</td><td>✅</td><td>2〜3h</td><td>¥1,500〜3,000</td><td>〇</td><td>★★★★★</td></tr>
-          <tr><td>スパ(大人)</td><td>✗</td><td>60〜120分</td><td>¥5,000〜10,000</td><td>✅</td><td>★★★★★</td></tr>
-          <tr class="hl"><td>アドベンチャーゾーン</td><td>✅</td><td>自由</td><td>無料(宿泊者)</td><td>✅</td><td>★★★★★</td></tr>
-          <tr><td>ショッピングモール</td><td>✅</td><td>2〜4h</td><td>自由</td><td>✅</td><td>★★★</td></tr>
-          <tr><td>ナイトマーケット(コルドバ)</td><td>✅</td><td>1〜2h</td><td>自由</td><td>△</td><td>★★★★</td></tr>
-        </tbody>
-      </table>
+    <h2>🤿 今回のアクティビティ</h2>
+    <p class="sub">フル活動日は7/29の1日だけ！だからこそ、みんなが楽しめるものに絞りました🌊</p>
+    <div class="grid grid-2" style="margin-bottom:18px">
+      <div class="card" style="border-top:5px solid var(--coral)">
+        <h3 style="margin-top:0;color:var(--coral-deep)">🚤 アイランドホッピング（7/29メイン）</h3>
+        <p style="margin:0;font-size:.92rem">ヒルトゥガン／ナルスアン／パンダノン島を巡ってシュノーケリング＆ランチBBQ。6歳から参加OK、家族みんなで一日満喫。<strong>★★★★★</strong></p>
+      </div>
+      <div class="card" style="border-top:5px solid var(--palm)">
+        <h3 style="margin-top:0;color:var(--palm-deep)">🏝️ ホテル前シュノーケリング</h3>
+        <p style="margin:0;font-size:.92rem">海洋保護区に面したビーチで無料。自由時間にふらっと楽しめる。<strong>★★★★</strong></p>
+      </div>
+      <div class="card" style="border-top:5px solid var(--sun)">
+        <h3 style="margin-top:0;color:var(--sun-deep)">🎮 アドベンチャーゾーン</h3>
+        <p style="margin:0;font-size:.92rem">ホテル内、宿泊者は無料。雨の日の切り札にもなる子供に大人気のスポット。<strong>★★★★★</strong></p>
+      </div>
+      <div class="card" style="border-top:5px solid var(--ocean)">
+        <h3 style="margin-top:0;color:var(--ocean-deep)">🛍️ ショッピング＆ナイトマーケット</h3>
+        <p style="margin:0;font-size:.92rem">7/30の自由時間にアヤラ/SMシーサイドやコルドバのナイトマーケットへ。おみやげ探しも楽しみのひとつ。<strong>★★★★</strong></p>
+      </div>
     </div>
+
+    <details>
+      <summary style="cursor:pointer;color:var(--ocean-deep);font-weight:600">📎 次回候補・今回は見送ったアクティビティ（参考）</summary>
+      <div class="table-wrap" style="margin-top:14px">
+        <table>
+          <thead><tr><th>アクティビティ</th><th>6歳OK?</th><th>所要</th><th>料金/名</th><th>雨</th><th>おすすめ</th></tr></thead>
+          <tbody>
+            <tr><td>ジンベエザメ(オスロブ)</td><td>✅一応</td><td>10〜12h</td><td>¥7,000〜12,000</td><td>△</td><td>★★★★★</td></tr>
+            <tr><td>テワラン滝</td><td>✅</td><td>2〜3h</td><td>¥1,500〜3,000</td><td>〇</td><td>★★★★★</td></tr>
+            <tr><td>パラセーリング</td><td>⚠️要確認</td><td>30〜45分</td><td>¥3,000〜5,000</td><td>✗</td><td>★★★★</td></tr>
+            <tr><td>バナナボート</td><td>✅</td><td>20〜30分</td><td>¥2,000〜3,500</td><td>✗</td><td>★★★★</td></tr>
+            <tr><td>体験ダイビング</td><td>✗(10歳+)</td><td>2〜3h</td><td>¥8,000〜15,000</td><td>✗</td><td>★★★</td></tr>
+            <tr><td>スパ(大人)</td><td>✗</td><td>60〜120分</td><td>¥5,000〜10,000</td><td>✅</td><td>★★★★★</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.85rem;color:var(--ink-soft);margin-top:8px">💡 今回は移動時間の都合で見送りましたが、次回また来る理由がひとつ増えました！</p>
+    </details>
   </section>
 
   <!-- 食事 -->
@@ -386,6 +412,19 @@
   <a href="index.html">ホームへ戻る</a> ・
   <a href="proposal-original/">パンフレット ↗</a>
 </footer>
+
+<script>
+(function(){
+  var dep = new Date("2027-07-27T00:00:00+09:00");
+  var now = new Date();
+  var diff = Math.ceil((dep - now) / 86400000);
+  var el = document.getElementById("countdown");
+  if (!el) return;
+  if (diff > 0) el.textContent = "🎉 出発まであと " + diff + " 日！";
+  else if (diff === 0) el.textContent = "🎉 本日出発！いってらっしゃい！";
+  else el.textContent = "🌺 素敵な旅になりましたか？";
+})();
+</script>
 
 </body>
 </html>
